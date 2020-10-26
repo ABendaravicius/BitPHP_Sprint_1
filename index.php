@@ -1,23 +1,13 @@
-<!-- Authentication/authorization section to allow access to file browser -->
 <?php
 session_start();
-if (isset($_GET['logout'])) {
+if (isset($_GET['logout'])) { // on logout delete all set authentication values
     session_start();
     unset($_SESSION['username']);
     unset($_SESSION['password']);
     unset($_SESSION['logged_in']);
-    // session_destroy();
-}
-
-if (isset($_POST['login']) && !empty($_POST['username']) && !empty($_POST['password'])) {
-    if ($_POST['username'] == 'admin' && $_POST['password'] == '1337c0d3') {
-        $_SESSION['logged_in'] = true;
-        $_SESSION['username'] = 'admin';
-    } else {
-        $msg = 'Wrong username or password!';
-    }
 }
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -30,92 +20,113 @@ if (isset($_POST['login']) && !empty($_POST['username']) && !empty($_POST['passw
 </head>
 
 <body>
-    <div>
-        <?php 
+    <div class="login-wrap">
+        <?php // Authentication/authorization section to allow access to file browser
         $msg = '';
         if(isset($_POST['login']) && !empty($_POST['username']) && !empty($_POST['password'])) {
-            if($_POST['username'] == 'admin' && $_POST['password'] == '1337c0d3') {
+            if($_POST['username'] == 'admin' && $_POST['password'] == 'letmein') {
                 $_SESSION['logged_in'] = true;
                 $_SESSION['timeout'] = time();
                 $_SESSION['username'] = 'admin';
             } else {
-                $msg = 'Wrong username or password!';
+                $msg = 'Authorization failure: wrong username or password!';
             }
         }
         ?>
     </div>
+
     <?php 
         if($_SESSION['logged_in'] == false) {
+            echo('<h2>Log In </h2>');
             echo('<form action = "" method = "post">' );
-            echo('<h2>' . $msg . '</h2>');
-            echo('<h3>Log In </h3>');
-            echo('<input type = "text" name = "username" placeholder = "user" required autofocus></br>');
-            echo('<input type = "password" name = "password" placeholder = "user1" required><br>');
-            echo('<button class = "button" type = "submit" name = "login">Login</button>');
+            echo('<span class="warn-msg">' . $msg . '</span><br>');
+            echo('<label for="username">Enter your username:<br></label>');
+            echo('<input type="text" id="username" name="username" required autofocus></br>');
+            echo('<label for="password">Enter your password:<br></label>');
+            echo('<input type="password" id="password" name="password" required><br>');
+            echo('<button class="button" type="submit" name="login">Login</button>');
             echo('</form>');
             die();
-        } 
-        // else {
-        //     echo('<button type="submit" name="logout">Logout</button>');
-        // }
+        }
     ?>
-    <h1>Web file browser</h1>
+
+    <h1>Tiny File Browser <span>(100% PHP guaranteed)</span></h1>
+
+    <form action="./index.php" method="GET"> <!-- Logout button -->
+        <button type="submit" name="logout">Log Out</button>
+    </form>
+    
     <?php
     $path = "." . $_GET['path'];
-    if (isset($_POST['name'])) {
+
+    if (isset($_POST['name'])) { // creates a folder of user-specified 'name' in current working directory
         mkdir($path . "/" . ($_POST['name']));
     }
-    if(isset($_POST['upload'])) {
+
+    if(isset($_POST['upload'])) { // file upload
         $file_name = $_FILES['file']['name'];
         $file_size = $_FILES['file']['size'];
         $file_tmp = $_FILES['file']['tmp_name'];
         $file_type = $_FILES['file']['type'];
-        $file_store = ($path . "/") . $file_name;
-        move_uploaded_file($file_tmp, $file_store);  
+        $file_store = ($path . "/") . $file_name; 
+        move_uploaded_file($file_tmp, $file_store);
     }
-    if (array_key_exists('action', $_GET)) {    
+
+    if (array_key_exists('action', $_GET)) { // file actions: delete and download
         if (array_key_exists('file', $_GET)) {
                 $file = "./" . $_GET['path'] . "./" . $_GET['file'];
             if ($_GET['action'] == 'delete') {
                 unlink($path . "/" . $_GET['file']);
             } elseif ($_GET['action'] == 'download') {
-                $fileDown = str_replace("&nbsp;", " ", htmlentities($file, null, 'utf-8'));
+                $fileDL = str_replace("&nbsp;", " ", htmlentities($file, null, 'utf-8'));
                 ob_clean();
                 ob_flush();
                 header('Content-Description: File Transfer');
                 header('Content-Type: application/pdf');
-                header('Content-Disposition: attachment; filename=' . basename($fileDown));
+                header('Content-Disposition: attachment; filename=' . basename($fileDL));
                 header('Content-Transfer-Encoding: binary');
                 header('Expires: 0');
                 header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
                 header('Pragma: public');
-                header('Content-Length: ' . filesize($fileDown));
+                header('Content-Length: ' . filesize($fileDL));
                 ob_end_flush();
-                readfile($fileDown);
+                readfile($fileDL);
                 exit;
             }
         }
     }
+
     $dir_contents = scandir($path);
-    echo ("<table><thead><tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Actions</th>
-        </tr></thead>");
-    echo ("<tbody><tr>");
-    foreach ($dir_contents as $cont) {
-        if ($cont == "." || $cont == "..") {
+
+
+    echo '<div class="path-wrap">Current directory: <span>' . $path . '/</span></div>';
+
+    // Table forming start
+    echo ("<table>
+            <thead>
+                <tr>
+                    <th>Type</th>
+                    <th>Name</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>");
+
+    echo ("<tbody>
+            <tr>");
+
+    foreach ($dir_contents as $item) {
+        if ($item == "." || $item == "..") {
             continue;
         }
-        echo ("<tr><td>" . (is_dir($path . "/" . $cont) ? "Dir" : "File") . "</td>");
-        if (is_dir($path . "/" . $cont)) {
-            echo ("<td>" . "<a href='./?path=" . $_GET['path'] . "/" . $cont . "'>" . $cont .  "</a></td>");
+        echo ("<tr><td>" . (is_dir($path . "/" . $item) ? "Folder" : "File") . "</td>");
+        if (is_dir($path . "/" . $item)) {
+            echo ("<td>" . "<a href='./?path=" . $_GET['path'] . "/" . $item . "'>" . $item .  "</a></td>");
         } else {
-            echo ("<td>" . $cont . "</td>");
+            echo ("<td>" . $item . "</td>");
         }
-        if (is_file($path . "/" . $cont)) {
-            if ($cont != "index.php") {
-                echo ("<td><button><a href='./?path=" . $_GET['path'] . "&file=" . $cont . "&action=delete" . "'>" . "Delete</a></button><button><a href='./?path=" . $_GET['path'] . "&file=" . $cont . "&action=download" . "'>" . "Download</a></button></td>");
+        if (is_file($path . "/" . $item)) {
+            if ($item != "index.php") {
+                echo ("<td><button><a href='./?path=" . $_GET['path'] . "&file=" . $item . "&action=delete" . "'>" . "Delete</a></button><button><a href='./?path=" . $_GET['path'] . "&file=" . $item . "&action=download" . "'>" . "Download</a></button></td>");
             } else {
                 echo ("<td></td>");
             }
@@ -123,7 +134,9 @@ if (isset($_POST['login']) && !empty($_POST['username']) && !empty($_POST['passw
             echo ("<td></td>");
         }
     }
-    echo ("</tbody></table>");
+    echo ("</tbody></table>"); // Table forming end
+
+
     $split = explode("/", $_GET['path']);
     $emptyString = "";
     for ($i = 0; $i < count($split) - 1; $i++) {
@@ -131,24 +144,20 @@ if (isset($_POST['login']) && !empty($_POST['username']) && !empty($_POST['passw
             continue;
         $emptyString .= "/" . $split[$i];
     }
-    echo ("<button>" . "<a href='./?path=" . $emptyString . "'>" . "BACK" . "</a>" . "</button>");
+    echo ("<button>" . "<a href='./?path=" . $emptyString . "'>" . "< Back" . "</a>" . "</button>");
     ?>
+
     <form action="<?php $path ?>" method="POST">
-        <label for="name">Directory name</label>
-        <br>
-        <input type="text" id="name" name="name" placeholder="Eneter dir name">
-        <button type="submit">Create new directory</button>
-        <br>
-        <br>
+        <label for="name">Create new folder: </label>
+        <input type="text" id="name" name="name" placeholder="Folder name">
+        <button type="submit">+</button>
         <br>
     </form>
-    <form action="./index.php" method="GET">
-        <button type="submit" name="logout">Logout</button>
-    </form>
+
     <form action="" method="POST" enctype="multipart/form-data">
         <input type="file" name="file">
         <br>
-        <button type="submit" name="upload">Upload file</button>
+        <button type="submit" name="upload">Upload file here</button>
     </form>
 </body>
 
