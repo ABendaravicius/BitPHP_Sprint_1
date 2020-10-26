@@ -1,0 +1,170 @@
+h1 {
+    color: #FFF;
+    margin: 0;
+
+    span {
+        color: #000;
+        font-size: 1.2rem;
+        font-weight: 600;
+    }
+}
+
+.logout {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+
+    .btn {
+    width: 120px;
+    @include btn;
+    text-align: left;
+
+        &:hover {
+            width: 120px;
+            font-weight: 900;
+            color: red;
+        }
+
+        &::before {
+            content: "\f2f5";
+            font-family: "Font Awesome 5 Free";
+            font-weight: 900;
+            position:absolute;
+            right: 10px;
+        }
+    }
+}
+
+.path-wrap {
+    padding: 15px 0;
+    font-weight: 900;
+    display: flex;
+    align-items: center;
+
+    span {
+        display: block;
+        font-weight: 400;
+        width: 100%;
+        margin-left: 10px;
+        background-color: #FFF;
+        padding: 5px;
+    }
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    border-spacing: none;
+    margin-bottom: 30px;
+
+    thead tr:first-child {
+        background-color: transparent;
+    }
+
+    a {
+        text-decoration: none;
+        font-weight: 900;
+    }
+
+    th {
+        text-align: left;
+        width: 40%;
+
+        &:first-child {
+            width: 20%;
+        }
+    }
+
+    th,
+    td {
+        padding: 10px;
+    }
+
+    tr {
+        height: 50px;
+
+        &:nth-child(odd) {
+            background-color: #f2e68a;
+        }
+    }
+
+    .fold,
+    .file {
+        display: inline-block;
+        position: relative;
+        padding-left: 20px;
+
+        &:before {
+            font-family: "Font Awesome 5 Free";
+            font-weight: 900;
+            position:absolute;
+            left: 0;
+        }
+    }
+
+    .fold:before {
+        content: "\f07b";
+    }
+
+    .file:before {
+        content: "\f15c";
+    }
+
+    .action-btn {
+        border: none;
+        border-radius: 10px;
+        padding: 5px 10px;
+        transition: filter ease 400ms;
+
+        &:first-child {
+            margin-right: 10px;
+        }
+
+        &:hover {
+            filter: grayscale(60%);
+        }
+
+        a {
+            color: #FFF;
+            font-weight: 500;
+
+            &:hover {
+                color: #000;
+            }
+        }
+    }
+
+    .delete-btn {
+        background-color: salmon;
+    }
+
+    .download-btn {
+        background-color: lightgreen;
+    }
+}
+
+.back-btn {
+    position: relative;
+    width: 120px;
+    @include btn;
+    text-align: center;
+    margin-bottom: 30px;
+
+        a {
+            text-decoration: none;
+            color: #000;
+        }
+
+        &:hover {
+            width: 120px;
+            font-weight: 900;
+        }
+
+        &::before {
+            content: "\f048";
+            font-family: "Font Awesome 5 Free";
+            font-weight: 900;
+            position:absolute;
+            left: 20px;
+        }
+}

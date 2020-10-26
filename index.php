@@ -20,40 +20,50 @@ if (isset($_GET['logout'])) { // on logout delete all set authentication values
 </head>
 
 <body>
-    <div class="login-wrap">
-        <?php // Authentication/authorization section to allow access to file browser
-        $msg = '';
-        if(isset($_POST['login']) && !empty($_POST['username']) && !empty($_POST['password'])) {
-            if($_POST['username'] == 'admin' && $_POST['password'] == 'letmein') {
-                $_SESSION['logged_in'] = true;
-                $_SESSION['timeout'] = time();
-                $_SESSION['username'] = 'admin';
-            } else {
-                $msg = 'Authorization failure: wrong username or password!';
-            }
+    <?php // Authentication/authorization section to allow access to file browser
+    $msg = '';
+    if(isset($_POST['login']) && !empty($_POST['username']) && !empty($_POST['password'])) {
+        if($_POST['username'] == 'admin' && $_POST['password'] == 'letmein') {
+            $_SESSION['logged_in'] = true;
+            $_SESSION['timeout'] = time();
+            $_SESSION['username'] = 'admin';
+        } else {
+            $msg = '<strong>Authorization failure:</strong> wrong username or password!';
         }
-        ?>
-    </div>
+    }
+    ?>
 
     <?php 
         if($_SESSION['logged_in'] == false) {
-            echo('<h2>Log In </h2>');
-            echo('<form action = "" method = "post">' );
-            echo('<span class="warn-msg">' . $msg . '</span><br>');
-            echo('<label for="username">Enter your username:<br></label>');
-            echo('<input type="text" id="username" name="username" required autofocus></br>');
-            echo('<label for="password">Enter your password:<br></label>');
-            echo('<input type="password" id="password" name="password" required><br>');
-            echo('<button class="button" type="submit" name="login">Login</button>');
-            echo('</form>');
+            echo('<div class="login-wrap">
+                    <div class="heading-wrap">
+                        <h2>Log In</h2>
+                        <div class="tip">
+                            <span>?</span>
+                            <p>Use the following credentials to log in:<br><br>
+                                Username: admin<br>
+                                Password: letmein<br><br>
+                                You\'re welcome!
+                            </p>
+                        </div>
+                    </div>
+                    <span class="warn-msg">' . $msg . '</span>
+                    <form action = "" method = "post">
+                        <label for="username">Enter your username:<br></label>
+                        <input type="text" id="username" name="username" required autofocus></br>
+                        <label for="password">Enter your password:<br></label>
+                        <input type="password" id="password" name="password" required><br>
+                        <button class="login-btn btn" type="submit" name="login">Login</button>
+                    </form>
+                </div>');
             die();
         }
     ?>
 
     <h1>Tiny File Browser <span>(100% PHP guaranteed)</span></h1>
 
-    <form action="./index.php" method="GET"> <!-- Logout button -->
-        <button type="submit" name="logout">Log Out</button>
+    <form class="logout" action="./index.php" method="GET"> <!-- Logout button -->
+        <button class="logout-btn btn" type="submit" name="logout">Log Out</button>
     </form>
     
     <?php
@@ -99,7 +109,7 @@ if (isset($_GET['logout'])) { // on logout delete all set authentication values
     $dir_contents = scandir($path);
 
 
-    echo '<div class="path-wrap">Current directory: <span>' . $path . '/</span></div>';
+    echo '<div class="path-wrap">Current&nbsp;directory:<span>' . $path . '/</span></div>';
 
     // Table forming start
     echo ("<table>
@@ -111,14 +121,13 @@ if (isset($_GET['logout'])) { // on logout delete all set authentication values
                 </tr>
             </thead>");
 
-    echo ("<tbody>
-            <tr>");
+    echo ("<tbody>");
 
     foreach ($dir_contents as $item) {
         if ($item == "." || $item == "..") {
             continue;
         }
-        echo ("<tr><td>" . (is_dir($path . "/" . $item) ? "Folder" : "File") . "</td>");
+        echo ("<tr><td>" . (is_dir($path . "/" . $item) ? "<span class=\"fold\">Folder</span>" : "<span class=\"file\">File</span>") . "</td>");
         if (is_dir($path . "/" . $item)) {
             echo ("<td>" . "<a href='./?path=" . $_GET['path'] . "/" . $item . "'>" . $item .  "</a></td>");
         } else {
@@ -126,7 +135,7 @@ if (isset($_GET['logout'])) { // on logout delete all set authentication values
         }
         if (is_file($path . "/" . $item)) {
             if ($item != "index.php") {
-                echo ("<td><button><a href='./?path=" . $_GET['path'] . "&file=" . $item . "&action=delete" . "'>" . "Delete</a></button><button><a href='./?path=" . $_GET['path'] . "&file=" . $item . "&action=download" . "'>" . "Download</a></button></td>");
+                echo ("<td><button class=\"delete-btn action-btn\"><a href='./?path=" . $_GET['path'] . "&file=" . $item . "&action=delete" . "'>" . "Delete</a></button><button class=\"download-btn action-btn\"><a href='./?path=" . $_GET['path'] . "&file=" . $item . "&action=download" . "'>" . "Download</a></button></td>");
             } else {
                 echo ("<td></td>");
             }
@@ -144,7 +153,7 @@ if (isset($_GET['logout'])) { // on logout delete all set authentication values
             continue;
         $emptyString .= "/" . $split[$i];
     }
-    echo ("<button>" . "<a href='./?path=" . $emptyString . "'>" . "< Back" . "</a>" . "</button>");
+    echo ("<button class=\"back-btn\">" . "<a href='./?path=" . $emptyString . "'>" . "Back" . "</a>" . "</button>");
     ?>
 
     <form action="<?php $path ?>" method="POST">

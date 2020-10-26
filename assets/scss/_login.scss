@@ -1,0 +1,96 @@
+.login-wrap {
+    position: relative;
+    margin: auto;
+    padding: 20px;
+    width: 30%;
+    min-width: 500px;
+    border-radius: 50px;
+    background: $bg;
+    box-shadow:  20px 20px 60px #b3aa66, 
+                -20px -20px 60px #f2e68a;
+    text-align: center;
+    overflow: hidden;
+
+    .heading-wrap {
+        position: relative;
+        h2 {
+            display: inline-block;
+            text-transform: uppercase;
+            margin:20px 0 10px;
+        }
+        .tip {
+            background-color: salmon;
+            padding: 15px;
+            border-radius: 20px;
+            position: absolute;
+            z-index: 100;
+            top: 0;
+            left: 0;
+            text-align: left;
+            color: #FFF;
+            clip-path: circle(10px at 15px 15px);
+            transition: all ease 200ms;
+            
+            span {
+                position: absolute;
+                top: 7px;
+                left: 10px;
+                font-weight: 900;
+                transition: all ease 500ms;
+            }
+
+            &:hover {
+                clip-path: circle(200px at 50% 50%);
+            }
+
+            &:hover > span {
+                opacity: 0;
+            }
+
+            
+        }
+    }
+    
+
+    > span.warn-msg {
+        display: inline-block;
+        font-size: 0.7rem;
+        vertical-align: middle;
+        height: 14px;
+        line-height: 14px;
+        margin-bottom: 10px;
+        color: red;
+    }
+
+    label {
+        font-size: 0.9rem;
+    }
+
+    input {
+        position: relative;
+        width: 60%;
+        padding: 10px;
+        margin: 10px 0;
+        text-align: center;
+        line-height: 24px;
+        font-size: 0.9rem;
+        vertical-align: middle;
+        outline: none;
+        border: none;
+        border-radius: 50px;
+        z-index: 10;
+        transition: all ease 200ms;
+
+        &:focus,
+        &:hover {
+            width: 80%;
+            outline: none;
+        }
+    }
+
+    .login-btn {
+        position: relative;
+        width: 20%;
+        @include btn;
+    }
+}

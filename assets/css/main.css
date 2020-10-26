@@ -1,5 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,700;1,300;1,400&display=swap");
-@import url("https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css");
+@import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css");
 * {
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
@@ -7,4 +7,332 @@
 
 body {
   font-family: 'Montserrat';
+  background-color: #d2c878;
+  padding: 20px;
+}
+
+body .btn:hover {
+  cursor: pointer;
+}
+
+.login-wrap {
+  position: relative;
+  margin: auto;
+  padding: 20px;
+  width: 30%;
+  min-width: 500px;
+  border-radius: 50px;
+  background: #d2c878;
+  -webkit-box-shadow: 20px 20px 60px #b3aa66,  -20px -20px 60px #f2e68a;
+          box-shadow: 20px 20px 60px #b3aa66,  -20px -20px 60px #f2e68a;
+  text-align: center;
+  overflow: hidden;
+}
+
+.login-wrap .heading-wrap {
+  position: relative;
+}
+
+.login-wrap .heading-wrap h2 {
+  display: inline-block;
+  text-transform: uppercase;
+  margin: 20px 0 10px;
+}
+
+.login-wrap .heading-wrap .tip {
+  background-color: salmon;
+  padding: 15px;
+  border-radius: 20px;
+  position: absolute;
+  z-index: 100;
+  top: 0;
+  left: 0;
+  text-align: left;
+  color: #FFF;
+  -webkit-clip-path: circle(10px at 15px 15px);
+          clip-path: circle(10px at 15px 15px);
+  -webkit-transition: all ease 200ms;
+  transition: all ease 200ms;
+}
+
+.login-wrap .heading-wrap .tip span {
+  position: absolute;
+  top: 7px;
+  left: 10px;
+  font-weight: 900;
+  -webkit-transition: all ease 500ms;
+  transition: all ease 500ms;
+}
+
+.login-wrap .heading-wrap .tip:hover {
+  -webkit-clip-path: circle(200px at 50% 50%);
+          clip-path: circle(200px at 50% 50%);
+}
+
+.login-wrap .heading-wrap .tip:hover > span {
+  opacity: 0;
+}
+
+.login-wrap > span.warn-msg {
+  display: inline-block;
+  font-size: 0.7rem;
+  vertical-align: middle;
+  height: 14px;
+  line-height: 14px;
+  margin-bottom: 10px;
+  color: red;
+}
+
+.login-wrap label {
+  font-size: 0.9rem;
+}
+
+.login-wrap input {
+  position: relative;
+  width: 60%;
+  padding: 10px;
+  margin: 10px 0;
+  text-align: center;
+  line-height: 24px;
+  font-size: 0.9rem;
+  vertical-align: middle;
+  outline: none;
+  border: none;
+  border-radius: 50px;
+  z-index: 10;
+  -webkit-transition: all ease 200ms;
+  transition: all ease 200ms;
+}
+
+.login-wrap input:focus, .login-wrap input:hover {
+  width: 80%;
+  outline: none;
+}
+
+.login-wrap .login-btn {
+  position: relative;
+  width: 20%;
+  border: none;
+  border-radius: 50px;
+  -webkit-transition: all ease 400ms;
+  transition: all ease 400ms;
+  background-color: transparent;
+  padding: 15px;
+  z-index: 1;
+}
+
+.login-wrap .login-btn:hover {
+  width: 80%;
+  background: #d2c878;
+  -webkit-box-shadow: 20px 20px 60px #b3aa66,  -20px -20px 60px #f2e68a;
+          box-shadow: 20px 20px 60px #b3aa66,  -20px -20px 60px #f2e68a;
+  z-index: 1;
+}
+
+h1 {
+  color: #FFF;
+  margin: 0;
+}
+
+h1 span {
+  color: #000;
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
+.logout {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+}
+
+.logout .btn {
+  width: 120px;
+  border: none;
+  border-radius: 50px;
+  -webkit-transition: all ease 400ms;
+  transition: all ease 400ms;
+  background-color: transparent;
+  padding: 15px;
+  z-index: 1;
+  text-align: left;
+}
+
+.logout .btn:hover {
+  width: 80%;
+  background: #d2c878;
+  -webkit-box-shadow: 20px 20px 60px #b3aa66,  -20px -20px 60px #f2e68a;
+          box-shadow: 20px 20px 60px #b3aa66,  -20px -20px 60px #f2e68a;
+  z-index: 1;
+}
+
+.logout .btn:hover {
+  width: 120px;
+  font-weight: 900;
+  color: red;
+}
+
+.logout .btn::before {
+  content: "\f2f5";
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
+  position: absolute;
+  right: 10px;
+}
+
+.path-wrap {
+  padding: 15px 0;
+  font-weight: 900;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.path-wrap span {
+  display: block;
+  font-weight: 400;
+  width: 100%;
+  margin-left: 10px;
+  background-color: #FFF;
+  padding: 5px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  border-spacing: none;
+  margin-bottom: 30px;
+}
+
+table thead tr:first-child {
+  background-color: transparent;
+}
+
+table a {
+  text-decoration: none;
+  font-weight: 900;
+}
+
+table th {
+  text-align: left;
+  width: 40%;
+}
+
+table th:first-child {
+  width: 20%;
+}
+
+table th,
+table td {
+  padding: 10px;
+}
+
+table tr {
+  height: 50px;
+}
+
+table tr:nth-child(odd) {
+  background-color: #f2e68a;
+}
+
+table .fold,
+table .file {
+  display: inline-block;
+  position: relative;
+  padding-left: 20px;
+}
+
+table .fold:before,
+table .file:before {
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
+  position: absolute;
+  left: 0;
+}
+
+table .fold:before {
+  content: "\f07b";
+}
+
+table .file:before {
+  content: "\f15c";
+}
+
+table .action-btn {
+  border: none;
+  border-radius: 10px;
+  padding: 5px 10px;
+  -webkit-transition: -webkit-filter ease 400ms;
+  transition: -webkit-filter ease 400ms;
+  transition: filter ease 400ms;
+  transition: filter ease 400ms, -webkit-filter ease 400ms;
+}
+
+table .action-btn:first-child {
+  margin-right: 10px;
+}
+
+table .action-btn:hover {
+  -webkit-filter: grayscale(60%);
+          filter: grayscale(60%);
+}
+
+table .action-btn a {
+  color: #FFF;
+  font-weight: 500;
+}
+
+table .action-btn a:hover {
+  color: #000;
+}
+
+table .delete-btn {
+  background-color: salmon;
+}
+
+table .download-btn {
+  background-color: lightgreen;
+}
+
+.back-btn {
+  position: relative;
+  width: 120px;
+  border: none;
+  border-radius: 50px;
+  -webkit-transition: all ease 400ms;
+  transition: all ease 400ms;
+  background-color: transparent;
+  padding: 15px;
+  z-index: 1;
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.back-btn:hover {
+  width: 80%;
+  background: #d2c878;
+  -webkit-box-shadow: 20px 20px 60px #b3aa66,  -20px -20px 60px #f2e68a;
+          box-shadow: 20px 20px 60px #b3aa66,  -20px -20px 60px #f2e68a;
+  z-index: 1;
+}
+
+.back-btn a {
+  text-decoration: none;
+  color: #000;
+}
+
+.back-btn:hover {
+  width: 120px;
+  font-weight: 900;
+}
+
+.back-btn::before {
+  content: "\f048";
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
+  position: absolute;
+  left: 20px;
 }
