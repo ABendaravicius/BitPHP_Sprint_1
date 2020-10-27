@@ -109,6 +109,12 @@ body .btn:hover {
   outline: none;
 }
 
+.login-wrap input:active, .login-wrap input:focus {
+  border-radius: 50px;
+  outline: none;
+  border: none;
+}
+
 .login-wrap .login-btn {
   position: relative;
   width: 20%;
@@ -204,6 +210,7 @@ table {
   width: 100%;
   border-collapse: collapse;
   border-spacing: none;
+  margin: 0;
   margin-bottom: 30px;
 }
 
@@ -297,6 +304,120 @@ table .download-btn {
   background-color: lightgreen;
 }
 
+.new-content {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.create-folder {
+  width: 20%;
+  padding-left: 10px;
+}
+
+.create-folder input {
+  display: inline-block;
+  width: 50%;
+  position: relative;
+  padding: 10px;
+  margin: 0;
+  text-align: left;
+  line-height: 24px;
+  font-size: 0.9rem;
+  vertical-align: middle;
+  outline: none;
+  border: none;
+  border-radius: 50px 0px 0px 50px;
+  -webkit-transition: all ease 400ms;
+  transition: all ease 400ms;
+}
+
+.create-folder input:focus {
+  width: 70%;
+}
+
+.create-folder button {
+  display: inline-block;
+  position: relative;
+  padding: 10px;
+  left: -5px;
+  margin: 0;
+  text-align: center;
+  line-height: 24px;
+  font-size: 1.4rem;
+  font-weight: 900;
+  vertical-align: middle;
+  outline: none;
+  border: none;
+  border-radius: 0px 50px 50px 0px;
+  background-color: lightgreen;
+  color: #FFF;
+  -webkit-transition: all ease 400ms;
+  transition: all ease 400ms;
+}
+
+.create-folder button:hover {
+  cursor: pointer;
+  -webkit-filter: grayscale(60%);
+          filter: grayscale(60%);
+  color: green;
+}
+
+.upload {
+  width: 80%;
+  padding-left: 10px;
+}
+
+.upload label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+.upload input {
+  display: inline-block;
+  width: 25%;
+  position: relative;
+  margin: 0;
+  text-align: left;
+  line-height: 24px;
+  font-size: 0.9rem;
+  vertical-align: middle;
+  outline: none;
+  border: none;
+}
+
+.upload button {
+  position: relative;
+  padding: 5px 10px;
+  padding-right: 35px;
+  margin: 0;
+  text-align: center;
+  line-height: 24px;
+  vertical-align: middle;
+  outline: none;
+  border: none;
+  border-radius: 30px;
+  background-color: lightgreen;
+  color: #FFF;
+  -webkit-transition: all ease 400ms;
+  transition: all ease 400ms;
+}
+
+.upload button:hover {
+  cursor: pointer;
+  -webkit-filter: grayscale(60%);
+          filter: grayscale(60%);
+  color: green;
+}
+
+.upload button::before {
+  content: '\f093';
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
+  position: absolute;
+  right: 10px;
+}
+
 .back-btn {
   position: relative;
   width: 120px;
@@ -308,7 +429,6 @@ table .download-btn {
   padding: 15px;
   z-index: 1;
   text-align: center;
-  margin-bottom: 30px;
 }
 
 .back-btn:hover {

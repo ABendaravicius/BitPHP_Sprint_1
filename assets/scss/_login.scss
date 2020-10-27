@@ -86,6 +86,13 @@
             width: 80%;
             outline: none;
         }
+
+        &:active,
+        &:focus {
+            border-radius: 50px;
+            outline: none;
+            border: none;
+        }
     }
 
     .login-btn {

@@ -55,6 +55,7 @@ table {
     width: 100%;
     border-collapse: collapse;
     border-spacing: none;
+    margin: 0;
     margin-bottom: 30px;
 
     thead tr:first-child {
@@ -143,12 +144,117 @@ table {
     }
 }
 
+.new-content {
+    display: flex;
+}
+
+.create-folder {
+    width: 20%;
+    padding-left: 10px;
+    
+    input {
+        display: inline-block;
+        width: 50%;
+        position: relative;
+        padding: 10px;
+        margin: 0;
+        text-align: left;
+        line-height: 24px;
+        font-size: 0.9rem;
+        vertical-align: middle;
+        outline: none;
+        border: none;
+        border-radius: 50px 0px 0px 50px;
+        transition: all ease 400ms;
+
+        &:focus {
+            width: 70%;
+        }
+    }
+
+    button {
+        display: inline-block;
+        position: relative;
+        padding: 10px;
+        left: -5px;
+        margin: 0;
+        text-align: center;
+        line-height: 24px;
+        font-size: 1.4rem;
+        font-weight: 900;
+        vertical-align: middle;
+        outline: none;
+        border: none;
+        border-radius: 0px 50px 50px 0px;
+        background-color: lightgreen;
+        color: #FFF;
+        transition: all ease 400ms;
+
+        &:hover {
+            cursor: pointer;
+            filter: grayscale(60%);
+            color: green;
+        }
+    }
+}
+
+.upload {
+    width: 80%;
+    padding-left: 10px;
+
+    label {
+        display: block;
+        margin-bottom: 5px;
+    }
+
+    input {
+        display: inline-block;
+        width: 25%;
+        position: relative;
+        margin: 0;
+        text-align: left;
+        line-height: 24px;
+        font-size: 0.9rem;
+        vertical-align: middle;
+        outline: none;
+        border: none;
+    }
+    button {
+        position: relative;
+        padding: 5px 10px;
+        padding-right: 35px;
+        margin: 0;
+        text-align: center;
+        line-height: 24px;
+        vertical-align: middle;
+        outline: none;
+        border: none;
+        border-radius: 30px;
+        background-color: lightgreen;
+        color: #FFF;
+        transition: all ease 400ms;
+
+        &:hover {
+            cursor: pointer;
+            filter: grayscale(60%);
+            color: green;
+        }
+
+        &::before {
+            content:'\f093';
+            font-family: "Font Awesome 5 Free";
+            font-weight: 900;
+            position:absolute;
+            right: 10px;
+        }
+    }
+}
+
 .back-btn {
     position: relative;
     width: 120px;
     @include btn;
     text-align: center;
-    margin-bottom: 30px;
 
         a {
             text-decoration: none;

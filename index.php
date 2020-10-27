@@ -69,7 +69,7 @@ if (isset($_GET['logout'])) { // on logout delete all set authentication values
     <?php
     $path = "." . $_GET['path'];
 
-    if (isset($_POST['name'])) { // creates a folder of user-specified 'name' in current working directory
+    if (isset($_POST['name']) && $_POST['name'] != '') { // creates a folder of user-specified 'name' in current working directory
         mkdir($path . "/" . ($_POST['name']));
     }
 
@@ -111,6 +111,15 @@ if (isset($_GET['logout'])) { // on logout delete all set authentication values
 
     echo '<div class="path-wrap">Current&nbsp;directory:<span>' . $path . '/</span></div>';
 
+    $split = explode("/", $_GET['path']);
+    $emptyString = "";
+    for ($i = 0; $i < count($split) - 1; $i++) {
+        if ($split[$i] == "")
+            continue;
+        $emptyString .= "/" . $split[$i];
+    }
+    echo ("<button class=\"back-btn\">" . "<a href='./?path=" . $emptyString . "'>" . "Back" . "</a>" . "</button>");
+
     // Table forming start
     echo ("<table>
             <thead>
@@ -144,30 +153,23 @@ if (isset($_GET['logout'])) { // on logout delete all set authentication values
         }
     }
     echo ("</tbody></table>"); // Table forming end
-
-
-    $split = explode("/", $_GET['path']);
-    $emptyString = "";
-    for ($i = 0; $i < count($split) - 1; $i++) {
-        if ($split[$i] == "")
-            continue;
-        $emptyString .= "/" . $split[$i];
-    }
-    echo ("<button class=\"back-btn\">" . "<a href='./?path=" . $emptyString . "'>" . "Back" . "</a>" . "</button>");
     ?>
 
-    <form action="<?php $path ?>" method="POST">
-        <label for="name">Create new folder: </label>
-        <input type="text" id="name" name="name" placeholder="Folder name">
-        <button type="submit">+</button>
-        <br>
-    </form>
+    <div class="new-content">
+        <form class="create-folder" action="<?php $path ?>" method="POST">
+            <label for="name">Create new folder:<br></label>
+            <input type="text" id="name" name="name" placeholder="Folder name">
+            <button type="submit">+</button>
+            <br>
+        </form>
 
-    <form action="" method="POST" enctype="multipart/form-data">
-        <input type="file" name="file">
-        <br>
-        <button type="submit" name="upload">Upload file here</button>
-    </form>
+        <form class="upload" action="" method="POST" enctype="multipart/form-data">
+            <label>Upload a file:<br></label>
+            <input type="file" name="file">
+            <button type="submit" name="upload">Upload file here</button>
+        </form>
+    </div>
+    
 </body>
 
 </html>
